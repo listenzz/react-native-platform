@@ -1,5 +1,3 @@
-import { NativeModules } from 'react-native'
-
-const { RNPlatform } = NativeModules
-
-export default RNPlatform
+export * from './DeviceUtil'
+export * from './BatteryOptimizationManager'
+export * from './ManufacturerBackgroundManager'

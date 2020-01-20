@@ -1,13 +1,14 @@
 {
   "name": "react-native-platform",
-  "description": "Platform special api for React Native.",
+  "description": "Platform tools for React Native.",
   "version": "0.1.0",
   "keywords": [
     "react-native",
     "android",
     "ios",
     "platform",
-    "api"
+    "tools",
+    "utils"
   ],
   "nativePackage": true,
   "repository": {
