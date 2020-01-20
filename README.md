@@ -52,3 +52,7 @@ showBackgroundSetting = () => {
   ])
 }
 ```
+
+## 感谢
+
+[Android 后台运行白名单，优雅实现保活](https://juejin.im/post/5dfaeccbf265da33910a441d)
