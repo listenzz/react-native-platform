@@ -1,10 +1,7 @@
 package com.reactnative.platform;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,18 +15,19 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.reactnative.platform.DeviceUtil.isHuaWei;
+import static com.reactnative.platform.DeviceUtil.isMeiZu;
+import static com.reactnative.platform.DeviceUtil.isOppo;
+import static com.reactnative.platform.DeviceUtil.isVivo;
+import static com.reactnative.platform.DeviceUtil.isXiaoMi;
+
 public class PlatformModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-    private BatteryOptimizationManager batteryOptimizationManager;
-    private ManufacturerBackgroundManager backgroundManager;
-
     public PlatformModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        batteryOptimizationManager = new BatteryOptimizationManager();
-        backgroundManager = new ManufacturerBackgroundManager();
     }
 
     @NonNull
@@ -51,7 +49,7 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void isIgnoringBatteryOptimizations(Promise promise) {
         Activity context = getCurrentActivity();
         if (context != null) {
-            promise.resolve(batteryOptimizationManager.isIgnoringBatteryOptimizations(context));
+            promise.resolve(BatteryOptimizationSettings.isIgnoringBatteryOptimizations(context));
         } else {
             promise.resolve(false);
         }
@@ -62,111 +60,85 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void requestIgnoreBatteryOptimizations() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            batteryOptimizationManager.requestIgnoreBatteryOptimizations(context);
+            BatteryOptimizationSettings.requestIgnoreBatteryOptimizations(context);
         }
     }
 
     @ReactMethod
-    public void showHuaweiSetting() {
+    public void openBatteryStrategySettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            backgroundManager.showHuaweiSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showXiaomiSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showXiaomiSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showOPPOSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showOPPOSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showVIVOSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showVIVOSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showMeizuSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showMeizuSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showSamsungSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showSamsungSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showLetvSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showLetvSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void showSmartisanSetting() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            backgroundManager.showSmartisanSetting(context);
-        }
-    }
-
-    @ReactMethod
-    public void openDetailSettings(Promise promise) {
-        try {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.setData(Uri.parse("package:" + getReactApplicationContext().getPackageName()));
-            Activity currentActivity = getCurrentActivity();
-            if (currentActivity != null) {
-                currentActivity.startActivity(intent);
-                promise.resolve(true);
-            } else {
-                promise.resolve(false);
+            if (isXiaoMi()) {
+                BatteryOptimizationSettings.openBatteryStrategySettings(context);
+            } else if (isVivo()) {
+                // 打开 vivo 管家
+                ManufacturerBackgroundSettings.openVivo(context);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void openBackgroundSettings() {
+        Activity context = getCurrentActivity();
+        if (context != null) {
+            if (isHuaWei()) {
+                ManufacturerBackgroundSettings.openHuaWei(context);
+            } else if (isXiaoMi()) {
+                ManufacturerBackgroundSettings.openXiaoMi(context);
+            } else if (isOppo()) {
+                ManufacturerBackgroundSettings.openOppo(context);
+            } else if (isVivo()) {
+                ManufacturerBackgroundSettings.openVivo(context);
+            } else if (isMeiZu()) {
+                ManufacturerBackgroundSettings.openMeiZu(context);
+            }
+        }
+    }
+
+    @ReactMethod
+    public void openSettings() {
+        Activity context = getCurrentActivity();
+        if (context != null) {
+            ActivityUtil.openDetailsSettings(context);
         }
     }
 
     @ReactMethod
     public void isGpsOpened(Promise promise) {
-        promise.resolve(GpsUtil.isGpsOpened(reactContext));
+        promise.resolve(GpsSettings.isGpsOpened(reactContext));
     }
 
     @ReactMethod
-    public void openGpsSettings(Promise promise) {
+    public void openGpsSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
             try {
-                GpsUtil.openGps(reactContext);
-                promise.resolve(true);
+                GpsSettings.openGps(context);
             } catch (Exception e) {
-                promise.reject(e);
+                e.printStackTrace();
+                ActivityUtil.openDetailsSettings(context);
             }
-        } else {
-            promise.resolve(false);
+        }
+    }
+
+    @ReactMethod
+    public void openAuthorizationSettings() {
+        Activity context = getCurrentActivity();
+        if (context != null) {
+            AuthorizationSettings.open(context);
+        }
+    }
+
+    @ReactMethod
+    public void areNotificationsEnabled(Promise promise) {
+        promise.resolve(NotificationSettings.areNotificationsEnabled(getReactApplicationContext()));
+    }
+
+    @ReactMethod
+    public void openNotificationSettings() {
+        Activity context = getCurrentActivity();
+        if (context != null) {
+            NotificationSettings.openNotificationSettings(context);
         }
     }
 

@@ -37,24 +37,3 @@ export function isMeizu() {
   }
   return BRAND.toLocaleLowerCase() === 'meizu'
 }
-
-export function isSamsung() {
-  if (!BRAND) {
-    return false
-  }
-  return BRAND.toLocaleLowerCase() === 'samsung'
-}
-
-export function isLeTV() {
-  if (!BRAND) {
-    return false
-  }
-  return BRAND.toLocaleLowerCase() === 'letv'
-}
-
-export function isSmartisan() {
-  if (!BRAND) {
-    return false
-  }
-  return BRAND.toLocaleLowerCase() === 'smartisan'
-}

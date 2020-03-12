@@ -4,11 +4,11 @@ import android.os.Build;
 
 public class DeviceUtil {
 
-    public static boolean isHuawei() {
+    public static boolean isHuaWei() {
         return Build.BRAND.toLowerCase().equals("huawei") || Build.BRAND.toLowerCase().equals("honor");
     }
 
-    public static boolean isXiaomi() {
+    public static boolean isXiaoMi() {
         return Build.BRAND.toLowerCase().equals("xiaomi");
     }
 
@@ -20,22 +20,10 @@ public class DeviceUtil {
         return Build.BRAND.toLowerCase().equals("vivo") || Build.BRAND.contains("bbk");
     }
 
-    public static boolean isMeizu() {
+    public static boolean isMeiZu() {
         return Build.BRAND.toLowerCase().equals("meizu");
     }
 
-    public static boolean isSamsung() {
-        return Build.BRAND.toLowerCase().equals("samsung");
-    }
-
-
-    public static boolean isLeTV() {
-        return Build.BRAND.toLowerCase().equals("letv");
-    }
-
-    public static boolean isSmartisan() {
-        return Build.BRAND.toLowerCase().equals("smartisan");
-    }
 
     public static boolean isEmulator() {
         return Build.FINGERPRINT.startsWith("generic")

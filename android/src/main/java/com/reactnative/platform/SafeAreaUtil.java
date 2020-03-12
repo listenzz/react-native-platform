@@ -52,7 +52,7 @@ public class SafeAreaUtil {
 
     private static Rect get3rdSafeInsetRect(Context context) {
         // 全面屏设置项更改
-        if (DeviceUtil.isHuawei()) {
+        if (DeviceUtil.isHuaWei()) {
             boolean isHuaweiNotchSetToShow = huaweiIsNotchSetToShowInSetting(context);
             if (sHuaweiIsNotchSetToShow != null && sHuaweiIsNotchSetToShow != isHuaweiNotchSetToShow) {
                 clearLandscapeRectInfo();
@@ -107,11 +107,11 @@ public class SafeAreaUtil {
             // TODO OPPO 设置-显示-应用全屏显示-凹形区域显示控制
             rect.top = DimensionUtil.getStatusBarHeight(context);
             rect.bottom = 0;
-        } else if (DeviceUtil.isHuawei()) {
+        } else if (DeviceUtil.isHuaWei()) {
             int[] notchSize = getNotchSizeInHuawei(context);
             rect.top = notchSize[1];
             rect.bottom = 0;
-        } else if (DeviceUtil.isXiaomi()) {
+        } else if (DeviceUtil.isXiaoMi()) {
             rect.top = getNotchHeightInXiaomi(context);
             rect.bottom = 0;
         }
@@ -126,14 +126,14 @@ public class SafeAreaUtil {
         } else if (DeviceUtil.isOppo()) {
             rect.left = DimensionUtil.getStatusBarHeight(context);
             rect.right = 0;
-        } else if (DeviceUtil.isHuawei()) {
+        } else if (DeviceUtil.isHuaWei()) {
             if (sHuaweiIsNotchSetToShow) {
                 rect.left = getNotchSizeInHuawei(context)[1];
             } else {
                 rect.left = 0;
             }
             rect.right = 0;
-        } else if (DeviceUtil.isXiaomi()) {
+        } else if (DeviceUtil.isXiaoMi()) {
             rect.left = getNotchHeightInXiaomi(context);
             rect.right = 0;
         }
@@ -148,11 +148,11 @@ public class SafeAreaUtil {
         } else if (DeviceUtil.isOppo()) {
             rect.top = 0;
             rect.bottom = DimensionUtil.getStatusBarHeight(context);
-        } else if (DeviceUtil.isHuawei()) {
+        } else if (DeviceUtil.isHuaWei()) {
             int[] notchSize = getNotchSizeInHuawei(context);
             rect.top = 0;
             rect.bottom = notchSize[1];
-        } else if (DeviceUtil.isXiaomi()) {
+        } else if (DeviceUtil.isXiaoMi()) {
             rect.top = 0;
             rect.bottom = getNotchHeightInXiaomi(context);
         }
@@ -167,14 +167,14 @@ public class SafeAreaUtil {
         } else if (DeviceUtil.isOppo()) {
             rect.right = DimensionUtil.getStatusBarHeight(context);
             rect.left = 0;
-        } else if (DeviceUtil.isHuawei()) {
+        } else if (DeviceUtil.isHuaWei()) {
             if (sHuaweiIsNotchSetToShow) {
                 rect.right = getNotchSizeInHuawei(context)[1];
             } else {
                 rect.right = 0;
             }
             rect.left = 0;
-        } else if (DeviceUtil.isXiaomi()) {
+        } else if (DeviceUtil.isXiaoMi()) {
             rect.right = getNotchHeightInXiaomi(context);
             rect.left = 0;
         }

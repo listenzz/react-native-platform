@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
 
-public class GpsUtil {
-    private GpsUtil() {
+public class GpsSettings {
+    private GpsSettings() {
     }
 
     public static boolean isGpsOpened(final Context context) {
@@ -18,7 +18,6 @@ public class GpsUtil {
         boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         return gps && network;
     }
-
 
     public static void openGps(Context context) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);

@@ -14,3 +14,10 @@ export function isIgnoringBatteryOptimizations(): Promise<boolean> {
 export function requestIgnoreBatteryOptimizations(): void {
   RNPlatform.requestIgnoreBatteryOptimizations()
 }
+
+/**
+ * 打开省电策略设置界面
+ */
+export function openBatteryStrategySettings(): void {
+  RNPlatform.openBatteryStrategySettings()
+}

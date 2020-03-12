@@ -4,9 +4,14 @@ import {
   BRAND,
   isIgnoringBatteryOptimizations,
   requestIgnoreBatteryOptimizations,
-  showBackgroundSetting,
+  openBatteryStrategySettings,
+  openBackgroundSettings,
   isBackgroundSettingSupported,
   backgroudSettingTip,
+  openDetailSettings,
+  openNotificationSettings,
+  openGpsSettings,
+  openAuthorizationSettings,
 } from 'react-native-platform'
 export default class App extends Component {
   static navigationItem = {
@@ -20,16 +25,17 @@ export default class App extends Component {
   }
 
   batteryOptimization = async () => {
-    if (Platform.OS === 'android' && Platform.Version >= 23) {
-      const ignored = await isIgnoringBatteryOptimizations()
-      if (!ignored) {
-        requestIgnoreBatteryOptimizations()
-      } else {
-        Alert.alert('提示', '本 App 已加入电池保护名单')
-      }
-    } else {
-      Alert.alert('提示', '仅支持 Android6 以上系统')
-    }
+    // if (Platform.OS === 'android' && Platform.Version >= 23) {
+    //   const ignored = await isIgnoringBatteryOptimizations()
+    //   if (!ignored) {
+    //     requestIgnoreBatteryOptimizations()
+    //   } else {
+    //     Alert.alert('提示', '本 App 已加入电池保护名单')
+    //   }
+    // } else {
+    //   Alert.alert('提示', '仅支持 Android6 以上系统')
+    // }
+    openGpsSettings()
   }
 
   showBackgroundSetting = () => {
@@ -47,7 +53,7 @@ export default class App extends Component {
       {
         text: '确定',
         onPress: () => {
-          showBackgroundSetting()
+          openBackgroundSettings()
         },
       },
     ])
