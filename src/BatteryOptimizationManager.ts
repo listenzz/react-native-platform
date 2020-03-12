@@ -4,7 +4,7 @@ const { RNPlatform } = NativeModules
 /**
  * 判断我们的应用是否在系统白名单中
  */
-export function isIgnoringBatteryOptimizations(): Promise<Boolean> {
+export function isIgnoringBatteryOptimizations(): Promise<boolean> {
   return RNPlatform.isIgnoringBatteryOptimizations()
 }
 
