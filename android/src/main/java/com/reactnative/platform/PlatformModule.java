@@ -81,16 +81,21 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openBackgroundSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            if (isHuaWei()) {
-                ManufacturerBackgroundSettings.openHuaWei(context);
-            } else if (isXiaoMi()) {
-                ManufacturerBackgroundSettings.openXiaoMi(context);
-            } else if (isOppo()) {
-                ManufacturerBackgroundSettings.openOppo(context);
-            } else if (isVivo()) {
-                ManufacturerBackgroundSettings.openVivo(context);
-            } else if (isMeiZu()) {
-                ManufacturerBackgroundSettings.openMeiZu(context);
+            try {
+                if (isHuaWei()) {
+                    ManufacturerBackgroundSettings.openHuaWei(context);
+                } else if (isXiaoMi()) {
+                    ManufacturerBackgroundSettings.openXiaoMi(context);
+                } else if (isOppo()) {
+                    ManufacturerBackgroundSettings.openOppo(context);
+                } else if (isVivo()) {
+                    ManufacturerBackgroundSettings.openVivo(context);
+                } else if (isMeiZu()) {
+                    ManufacturerBackgroundSettings.openMeiZu(context);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                ActivityUtil.openDetailsSettings(context);
             }
         }
     }
@@ -125,7 +130,12 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openAuthorizationSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            AuthorizationSettings.open(context);
+            try {
+                AuthorizationSettings.open(context);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ActivityUtil.openDetailsSettings(context);
+            }
         }
     }
 
@@ -138,7 +148,12 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openNotificationSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            NotificationSettings.openNotificationSettings(context);
+            try {
+                NotificationSettings.openNotificationSettings(context);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ActivityUtil.openDetailsSettings(context);
+            }
         }
     }
 

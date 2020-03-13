@@ -2,5 +2,5 @@
           package="com.reactnative.platform">
 
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
+    <uses-permission android:name="com.huawei.systemmanager.permission.ACCESS_INTERFACE" />
 </manifest>
