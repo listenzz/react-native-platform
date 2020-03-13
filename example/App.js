@@ -55,24 +55,27 @@ export default class App extends Component {
             <Text style={styles.button}> openGpsSettings</Text>
           </TouchableOpacity>
         </View>
+        {Platform.OS === 'android' && (
+          <>
+            <View style={styles.section}>
+              <TouchableOpacity onPress={this.batteryOptimization} activeOpacity={0.8}>
+                <Text style={styles.button}> openBatteryStrategySettings</Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.section}>
-          <TouchableOpacity onPress={this.batteryOptimization} activeOpacity={0.8}>
-            <Text style={styles.button}> openBatteryStrategySettings</Text>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.section}>
+              <TouchableOpacity onPress={this.showBackgroundSetting} activeOpacity={0.8}>
+                <Text style={styles.button}> openBackgroundSettings </Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.section}>
-          <TouchableOpacity onPress={this.showBackgroundSetting} activeOpacity={0.8}>
-            <Text style={styles.button}> openBackgroundSettings </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.section}>
-          <TouchableOpacity onPress={this.showIgnoreBatteryOptimizations} activeOpacity={0.8}>
-            <Text style={styles.button}> requestIgnoreBatteryOptimizations </Text>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.section}>
+              <TouchableOpacity onPress={this.showIgnoreBatteryOptimizations} activeOpacity={0.8}>
+                <Text style={styles.button}> requestIgnoreBatteryOptimizations </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </View>
     )
   }
