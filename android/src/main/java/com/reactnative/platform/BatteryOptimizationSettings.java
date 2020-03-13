@@ -29,6 +29,7 @@ public class BatteryOptimizationSettings {
         try {
             Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + context.getPackageName()));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,6 +44,7 @@ public class BatteryOptimizationSettings {
 //                    "com.miui.powerkeeper.ui.HiddenAppsConfigActivity"));
             intent.putExtra("package_name", context.getPackageName());
             intent.putExtra("package_label", context.getResources().getString(context.getApplicationInfo().labelRes));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -5,9 +5,8 @@ import {
   openBatteryStrategySettings,
   openBackgroundSettings,
   openSettings,
-  openNotificationSettings,
   openGpsSettings,
-  openAuthorizationSettings,
+  requestIgnoreBatteryOptimizations,
 } from 'react-native-platform'
 export default class App extends Component {
   static navigationItem = {
@@ -24,14 +23,6 @@ export default class App extends Component {
     openSettings()
   }
 
-  showNotificationSettings = () => {
-    openNotificationSettings()
-  }
-
-  showAuthorizationSettings = () => {
-    openAuthorizationSettings()
-  }
-
   showGpsSettings = () => {
     openGpsSettings()
   }
@@ -44,6 +35,10 @@ export default class App extends Component {
     openBackgroundSettings()
   }
 
+  showIgnoreBatteryOptimizations = () => {
+    requestIgnoreBatteryOptimizations()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -52,18 +47,6 @@ export default class App extends Component {
         <View style={styles.section}>
           <TouchableOpacity onPress={this.showSettings} activeOpacity={0.8}>
             <Text style={styles.button}> openSettings</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.section}>
-          <TouchableOpacity onPress={this.showNotificationSettings} activeOpacity={0.8}>
-            <Text style={styles.button}> openNotificationSettings</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.section}>
-          <TouchableOpacity onPress={this.showAuthorizationSettings} activeOpacity={0.8}>
-            <Text style={styles.button}> openAuthorizationSettings</Text>
           </TouchableOpacity>
         </View>
 
@@ -84,6 +67,12 @@ export default class App extends Component {
             <Text style={styles.button}> openBackgroundSettings </Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.section}>
+          <TouchableOpacity onPress={this.showIgnoreBatteryOptimizations} activeOpacity={0.8}>
+            <Text style={styles.button}> requestIgnoreBatteryOptimizations </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -102,6 +91,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 40,
     backgroundColor: '#EEEEEE',
+    marginBottom: 8,
   },
   section: {
     height: 40,

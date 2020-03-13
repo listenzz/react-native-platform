@@ -27,8 +27,15 @@ RCT_EXPORT_METHOD(openGpsSettings) {
 }
 
 RCT_EXPORT_METHOD(openSettings) {
-    NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    [[UIApplication sharedApplication] openURL:settingsURL];
+    UIApplication *sharedApplication = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    if (@available(iOS 10.0, *)) {
+      [sharedApplication openURL:url options:@{} completionHandler:^(BOOL success) {
+        
+      }];
+    } else {
+      [sharedApplication openURL:url];
+    }
 }
 
 

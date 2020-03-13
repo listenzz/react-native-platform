@@ -1,8 +1,10 @@
 package com.reactnative.platform;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 
-import static com.reactnative.platform.ActivityUtil.openActivity;
+import androidx.annotation.NonNull;
 
 // 厂商后台管理，感谢 https://juejin.im/post/5dfaeccbf265da33910a441d
 public class ManufacturerBackgroundSettings {
@@ -56,6 +58,27 @@ public class ManufacturerBackgroundSettings {
     // 操作步骤：权限管理 -> 后台管理 -> 点击应用 -> 允许后台运行
     public static void openMeiZu(Context context) {
         openActivity(context, "com.meizu.safe");
+    }
+
+    /**
+     * 跳转到指定应用的首页
+     */
+    public static void openActivity(@NonNull Context context, @NonNull String packageName) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent != null) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
+
+    /**
+     * 跳转到指定应用的指定页面
+     */
+    public static void openActivity(@NonNull Context context, @NonNull String packageName, @NonNull String activityName) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setComponent(new ComponentName(packageName, activityName));
+        context.startActivity(intent);
     }
 
 }

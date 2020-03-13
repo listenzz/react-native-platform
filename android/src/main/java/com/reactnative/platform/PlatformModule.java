@@ -1,7 +1,11 @@
 package com.reactnative.platform;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,21 +85,16 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openBackgroundSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            try {
-                if (isHuaWei()) {
-                    ManufacturerBackgroundSettings.openHuaWei(context);
-                } else if (isXiaoMi()) {
-                    ManufacturerBackgroundSettings.openXiaoMi(context);
-                } else if (isOppo()) {
-                    ManufacturerBackgroundSettings.openOppo(context);
-                } else if (isVivo()) {
-                    ManufacturerBackgroundSettings.openVivo(context);
-                } else if (isMeiZu()) {
-                    ManufacturerBackgroundSettings.openMeiZu(context);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                ActivityUtil.openDetailsSettings(context);
+            if (isHuaWei()) {
+                ManufacturerBackgroundSettings.openHuaWei(context);
+            } else if (isXiaoMi()) {
+                ManufacturerBackgroundSettings.openXiaoMi(context);
+            } else if (isOppo()) {
+                ManufacturerBackgroundSettings.openOppo(context);
+            } else if (isVivo()) {
+                ManufacturerBackgroundSettings.openVivo(context);
+            } else if (isMeiZu()) {
+                ManufacturerBackgroundSettings.openMeiZu(context);
             }
         }
     }
@@ -104,7 +103,7 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            ActivityUtil.openDetailsSettings(context);
+            openDetailsSettings(context);
         }
     }
 
@@ -117,44 +116,19 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     public void openGpsSettings() {
         Activity context = getCurrentActivity();
         if (context != null) {
-            try {
-                GpsSettings.openGps(context);
-            } catch (Exception e) {
-                e.printStackTrace();
-                ActivityUtil.openDetailsSettings(context);
-            }
+            GpsSettings.openGps(context);
         }
     }
 
-    @ReactMethod
-    public void openAuthorizationSettings() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            try {
-                AuthorizationSettings.open(context);
-            } catch (Exception e) {
-                e.printStackTrace();
-                ActivityUtil.openDetailsSettings(context);
-            }
+    public static void openDetailsSettings(Context context) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    @ReactMethod
-    public void areNotificationsEnabled(Promise promise) {
-        promise.resolve(NotificationSettings.areNotificationsEnabled(getReactApplicationContext()));
-    }
-
-    @ReactMethod
-    public void openNotificationSettings() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
-            try {
-                NotificationSettings.openNotificationSettings(context);
-            } catch (Exception e) {
-                e.printStackTrace();
-                ActivityUtil.openDetailsSettings(context);
-            }
-        }
-    }
-
 }
