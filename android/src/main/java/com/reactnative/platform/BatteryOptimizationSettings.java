@@ -13,24 +13,24 @@ import androidx.annotation.RequiresApi;
 public class BatteryOptimizationSettings {
 
     // 判断我们的应用是否在系统白名单中
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean isIgnoringBatteryOptimizations(Context context) {
-        boolean isIgnoring = false;
+        boolean isIgnoring = true;
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        if (powerManager != null) {
+        if (powerManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             isIgnoring = powerManager.isIgnoringBatteryOptimizations(context.getPackageName());
         }
         return isIgnoring;
     }
 
     // 申请加入系统白名单
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void requestIgnoreBatteryOptimizations(Context context) {
         try {
-            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-            intent.setData(Uri.parse("package:" + context.getPackageName()));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:" + context.getPackageName()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
