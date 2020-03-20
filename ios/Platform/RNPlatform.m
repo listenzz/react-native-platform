@@ -17,6 +17,15 @@ RCT_EXPORT_METHOD(isGpsOpened:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromi
     resolve([NSNumber numberWithBool:[CLLocationManager locationServicesEnabled]]);
 }
 
+RCT_EXPORT_METHOD(openGpsSettings) {
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"App-Prefs:root"] options:[NSDictionary new] completionHandler:nil];
+    } else {
+        // Fallback on earlier versions
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root"]];
+    }
+}
+
 RCT_EXPORT_METHOD(openSettings) {
     UIApplication *sharedApplication = [UIApplication sharedApplication];
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
