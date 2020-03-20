@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native'
+import { NativeModules, Platform } from 'react-native'
 const { RNPlatform } = NativeModules
 
 export function openSettings() {
@@ -10,7 +10,9 @@ export function isGpsOpened(): Promise<boolean> {
 }
 
 export function openGpsSettings() {
-  RNPlatform.openGpsSettings()
+  if (Platform.OS === 'android') {
+    RNPlatform.openGpsSettings()
+  }
 }
 
 export * from './DeviceUtil'
