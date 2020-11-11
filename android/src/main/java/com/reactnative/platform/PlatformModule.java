@@ -19,6 +19,7 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.reactnative.platform.DeviceUtil.isEmulator;
 import static com.reactnative.platform.DeviceUtil.isHuaWei;
 import static com.reactnative.platform.DeviceUtil.isMeiZu;
 import static com.reactnative.platform.DeviceUtil.isOppo;
@@ -118,6 +119,11 @@ public class PlatformModule extends ReactContextBaseJavaModule {
         if (context != null) {
             GpsSettings.openGps(context);
         }
+    }
+
+    @ReactMethod
+    public void isSimulator(Promise promise) {
+        promise.resolve(isEmulator());
     }
 
     public static void openDetailsSettings(Context context) {

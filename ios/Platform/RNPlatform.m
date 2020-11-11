@@ -38,5 +38,13 @@ RCT_EXPORT_METHOD(openSettings) {
     }
 }
 
+RCT_EXPORT_METHOD(isSimulator:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    BOOL isSimulator = NO;
+#if TARGET_IPHONE_SIMULATOR
+    isSimulator = YES;
+#endif
+    resolve(@(isSimulator));
+}
+
 
 @end
