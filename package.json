@@ -1,7 +1,7 @@
 {
   "name": "react-native-platform",
   "description": "Platform tools for React Native.",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "keywords": [
     "react-native",
     "android",
