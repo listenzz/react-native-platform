@@ -7,8 +7,6 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
 
-import androidx.annotation.RequiresApi;
-
 // 感谢：https://juejin.im/post/5dfaeccbf265da33910a441d
 public class BatteryOptimizationSettings {
 
