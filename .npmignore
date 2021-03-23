@@ -1,5 +1,7 @@
 example/
 */build/
+src/
+react-native.config.js
 
 # OSX
 #

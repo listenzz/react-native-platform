@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTBridgeModule.h>
-#import <NavigationHybrid/NavigationHybrid.h>
+#import <HybridNavigation/HybridNavigation.h>
 
 @interface AppDelegate ()
 

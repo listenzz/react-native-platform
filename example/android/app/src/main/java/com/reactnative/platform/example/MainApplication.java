@@ -11,7 +11,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import com.navigationhybrid.ReactBridgeManager;
+import com.reactnative.hybridnavigation.ReactBridgeManager;
 import com.reactnative.platform.PlatformPackage;
 
 public class MainApplication extends Application implements ReactApplication {

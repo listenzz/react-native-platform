@@ -1,7 +1,7 @@
 {
   "name": "react-native-platform",
   "description": "Platform tools for React Native.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "keywords": [
     "react-native",
     "android",
@@ -30,30 +30,30 @@
     "run:ios": "react-native run-ios --project-path ./example/ios",
     "start:android": "adb shell am start -n com.reactnative.platform.example/.MainActivity",
     "run:android": "cd example/android && ./gradlew installDebug && npm run start:android",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
   },
   "peerDependencies": {
-    "react": "^16.8.1",
-    "react-native": ">=0.60.4"
+    "react": ">=16.8",
+    "react-native": ">=0.60"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
-    "@react-native-community/eslint-config": "0.0.5",
-    "@types/jest": "^24.0.11",
-    "@types/react": "^16.8.14",
-    "@types/react-native": "^0.60.21",
-    "@types/react-test-renderer": "16.9.0",
-    "babel-jest": "^24.9.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.5.0",
-    "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.56.0",
-    "react": "16.9.0",
-    "react-native": "^0.61.3",
-    "react-native-navigation-hybrid": "^0.18.0",
-    "react-test-renderer": "16.9.0",
-    "typescript": "3.5.3"
+    "@babel/core": "^7.13.10",
+    "@babel/runtime": "^7.13.10",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^26.0.21",
+    "@types/react": "^17.0.1",
+    "@types/react-native": "^0.64.0",
+    "@types/react-test-renderer": "17.0.1",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.14.0",
+    "hybrid-navigation": "^1.4.2",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react": "17.0.1",
+    "react-native": "^0.64.0",
+    "react-test-renderer": "17.0.1",
+    "typescript": "^3.7.3"
   },
   "jest": {
     "preset": "react-native",
