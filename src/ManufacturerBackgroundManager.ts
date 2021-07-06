@@ -6,8 +6,8 @@ export function isBackgroundSettingSupported() {
   return isHuawei() || isXiaomi() || isVIVO() || isOPPO() || isMeizu()
 }
 
-export function openBackgroundSettings() {
-  RNPlatform.openBackgroundSettings()
+export function openBackgroundSettings(): Promise<boolean> {
+  return RNPlatform.openBackgroundSettings()
 }
 
 export function backgroudSettingTip() {

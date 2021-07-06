@@ -27,6 +27,7 @@ import static com.reactnative.platform.DeviceUtil.isVivo;
 import static com.reactnative.platform.DeviceUtil.isXiaoMi;
 
 public class PlatformModule extends ReactContextBaseJavaModule {
+    private static final String ErrorCode = "PlatformModuleError";
 
     private final ReactApplicationContext reactContext;
 
@@ -70,22 +71,29 @@ public class PlatformModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openBatteryStrategySettings() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
+    public void openBatteryStrategySettings(Promise promise) {
+        try {
+            Activity context = getCurrentActivity();
             if (isXiaoMi()) {
                 BatteryOptimizationSettings.openBatteryStrategySettings(context);
             } else if (isVivo()) {
                 // 打开 vivo 管家
                 ManufacturerBackgroundSettings.openVivo(context);
+            } else {
+                promise.resolve(false);
+                return;
             }
+
+            promise.resolve(true);
+        } catch (Exception e) {
+            promise.reject(ErrorCode, e.getMessage());
         }
     }
 
     @ReactMethod
-    public void openBackgroundSettings() {
-        Activity context = getCurrentActivity();
-        if (context != null) {
+    public void openBackgroundSettings(Promise promise) {
+        try {
+            Activity context = getCurrentActivity();
             if (isHuaWei()) {
                 ManufacturerBackgroundSettings.openHuaWei(context);
             } else if (isXiaoMi()) {
@@ -96,7 +104,13 @@ public class PlatformModule extends ReactContextBaseJavaModule {
                 ManufacturerBackgroundSettings.openVivo(context);
             } else if (isMeiZu()) {
                 ManufacturerBackgroundSettings.openMeiZu(context);
+            } else {
+                promise.resolve(false);
+                return;
             }
+            promise.resolve(true);
+        } catch (Exception e) {
+            promise.reject(ErrorCode, e.getMessage());
         }
     }
 

@@ -18,6 +18,6 @@ export function requestIgnoreBatteryOptimizations(): void {
 /**
  * 打开省电策略设置界面
  */
-export function openBatteryStrategySettings(): void {
-  RNPlatform.openBatteryStrategySettings()
+export function openBatteryStrategySettings(): Promise<boolean> {
+  return RNPlatform.openBatteryStrategySettings()
 }

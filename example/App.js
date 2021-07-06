@@ -27,12 +27,20 @@ export default class App extends Component {
     openGpsSettings()
   }
 
-  batteryOptimization = () => {
-    openBatteryStrategySettings()
+  batteryOptimization = async () => {
+    try {
+      await openBatteryStrategySettings()
+    } catch (e) {
+      console.log('openBatteryStrategySettings failed: ' + e.message)
+    }
   }
 
-  showBackgroundSetting = () => {
-    openBackgroundSettings()
+  showBackgroundSetting = async () => {
+    try {
+      await openBackgroundSettings()
+    } catch (e) {
+      console.log('openBackgroundSettings failed: ' + e.message)
+    }
   }
 
   showIgnoreBatteryOptimizations = () => {

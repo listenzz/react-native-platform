@@ -35,18 +35,13 @@ public class BatteryOptimizationSettings {
     }
 
     // 打开小米省电策略配置页面
-    public static void openBatteryStrategySettings(Context context) {
-        try {
-            Intent intent = new Intent("miui.intent.action.HIDDEN_APPS_CONFIG_ACTIVITY");
+    public static void openBatteryStrategySettings(Context context) throws Exception {
+        Intent intent = new Intent("miui.intent.action.HIDDEN_APPS_CONFIG_ACTIVITY");
 //            intent.setComponent(new ComponentName("com.miui.powerkeeper",
 //                    "com.miui.powerkeeper.ui.HiddenAppsConfigActivity"));
-            intent.putExtra("package_name", context.getPackageName());
-            intent.putExtra("package_label", context.getResources().getString(context.getApplicationInfo().labelRes));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        intent.putExtra("package_name", context.getPackageName());
+        intent.putExtra("package_label", context.getResources().getString(context.getApplicationInfo().labelRes));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
-
 }
