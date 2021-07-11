@@ -1,12 +1,20 @@
 Platform tools for React Native.
 
+## 权限
+
+根据需要，请在 AndroidManifest.xml 中加入如下权限
+
+```xml
+<!--电池优化-->
+<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+<!--华为-->
+<uses-permission android:name="com.huawei.systemmanager.permission.ACCESS_INTERFACE" />
+```
+
 ## 电池优化设置
 
 ```js
-import {
-  isIgnoringBatteryOptimizations,
-  requestIgnoreBatteryOptimizations,
-} from 'react-native-platform'
+import { isIgnoringBatteryOptimizations, requestIgnoreBatteryOptimizations } from 'react-native-platform'
 
 batteryOptimization = async () => {
   if (Platform.OS === 'android' && Platform.Version >= 23) {
@@ -25,11 +33,7 @@ batteryOptimization = async () => {
 ## 后台运行设置
 
 ```js
-import {
-  showBackgroundSetting,
-  isBackgroundSettingSupported,
-  backgroudSettingTip,
-} from 'react-native-platform'
+import { showBackgroundSetting, isBackgroundSettingSupported, backgroudSettingTip } from 'react-native-platform'
 
 showBackgroundSetting = () => {
   if (Platform.OS !== 'android') {
