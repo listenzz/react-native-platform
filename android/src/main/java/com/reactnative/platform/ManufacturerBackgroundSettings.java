@@ -31,8 +31,17 @@ public class ManufacturerBackgroundSettings {
     }
 
     private static void openHuaWeiPhoneManagerActivity(Context context) throws Exception {
-        openActivity(context, "com.huawei.systemmanager",
-                "com.huawei.systemmanager.mainscreen.MainScreenActivity");
+        try {
+            openActivity(context, "com.huawei.systemmanager",
+                    "com.huawei.systemmanager.mainscreen.MainScreenActivity");
+        } catch (Exception e) {
+            openHonor(context);
+        }
+    }
+
+    private static void openHonor(Context context) throws Exception {
+        openActivity(context, "com.hihonor.systemmanager",
+                "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity");
     }
 
     // 跳转小米安全中心的自启动管理页面
