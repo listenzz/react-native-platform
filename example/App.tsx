@@ -8,14 +8,15 @@ import {
   openGpsSettings,
   requestIgnoreBatteryOptimizations,
 } from 'react-native-platform'
-export default class App extends Component {
+
+export default class App extends Component<any> {
   static navigationItem = {
     titleItem: {
       title: 'Platform 演示',
     },
   }
 
-  constructor(props) {
+  constructor(props: any) {
     super(props)
   }
 
