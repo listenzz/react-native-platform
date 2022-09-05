@@ -40,8 +40,13 @@ public class ManufacturerBackgroundSettings {
     }
 
     private static void openHonorPhoneManagerActivity(Context context) throws Exception {
-        openActivity(context, "com.hihonor.systemmanager",
-            "com.huawei.systemmanager.mainscreen.MainScreenActivity");
+        try {
+            openActivity(context, "com.hihonor.systemmanager",
+                "com.huawei.systemmanager.mainscreen.MainScreenActivity");
+        } catch (Exception e) {
+            openActivity(context, "com.hihonor.systemmanager",
+                "com.hihonor.systemmanager.mainscreen.MainScreenActivity");
+        }
     }
 
     // 跳转小米安全中心的自启动管理页面
