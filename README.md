@@ -1,17 +1,25 @@
 Platform tools for React Native.
 
+- 申请后台运行白名单 （Android 保活）
+
+- 申请国内厂商后台管理白名单（Android 保活）
+
+- 打开系统设置
+
+- 打开 GPS 设置
+
 ## 权限
 
 根据需要，请在 AndroidManifest.xml 中加入如下权限
 
 ```xml
-<!--电池优化-->
+<!--申请加入电池优化白名单-->
 <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-<!--华为-->
+<!--申请华为后台管理白名单-->
 <uses-permission android:name="com.huawei.systemmanager.permission.ACCESS_INTERFACE" />
 ```
 
-## 电池优化设置
+## 申请加入电池优化白名单
 
 ```js
 import { isIgnoringBatteryOptimizations, requestIgnoreBatteryOptimizations } from 'react-native-platform'
@@ -30,7 +38,7 @@ batteryOptimization = async () => {
 }
 ```
 
-## 后台运行设置
+## 申请国内厂商后台管理白名单
 
 ```js
 import { showBackgroundSetting, isBackgroundSettingSupported, backgroudSettingTip } from 'react-native-platform'
@@ -59,5 +67,6 @@ showBackgroundSetting = () => {
 
 ## 感谢
 
-[QMUI_Android](https://github.com/Tencent/QMUI_Android)
-[Android 后台运行白名单，优雅实现保活](https://juejin.im/post/5dfaeccbf265da33910a441d)
+- [QMUI_Android](https://github.com/Tencent/QMUI_Android)
+
+- [Android 后台运行白名单，优雅实现保活](https://juejin.im/post/5dfaeccbf265da33910a441d)

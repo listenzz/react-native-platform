@@ -51,36 +51,36 @@ export default class App extends Component<any> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.tip}>手机品牌:{BRAND}</Text>
+        <Text style={styles.tip}> 手机品牌:{BRAND} </Text>
 
         <View style={styles.section}>
           <TouchableOpacity onPress={this.showSettings} activeOpacity={0.8}>
-            <Text style={styles.button}> openSettings</Text>
+            <Text style={styles.button}> 打开系统设置页面 </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <TouchableOpacity onPress={this.showGpsSettings} activeOpacity={0.8}>
-            <Text style={styles.button}> openGpsSettings</Text>
+            <Text style={styles.button}> 打开 GPS 设置页面 </Text>
           </TouchableOpacity>
         </View>
         {Platform.OS === 'android' && (
           <>
             <View style={styles.section}>
               <TouchableOpacity onPress={this.batteryOptimization} activeOpacity={0.8}>
-                <Text style={styles.button}> openBatteryStrategySettings</Text>
+                <Text style={styles.button}> 打开省电策略设置界面 </Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.section}>
               <TouchableOpacity onPress={this.showBackgroundSetting} activeOpacity={0.8}>
-                <Text style={styles.button}> openBackgroundSettings </Text>
+                <Text style={styles.button}> 申请国内厂商后台管理白名单 </Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.section}>
               <TouchableOpacity onPress={this.showIgnoreBatteryOptimizations} activeOpacity={0.8}>
-                <Text style={styles.button}> requestIgnoreBatteryOptimizations </Text>
+                <Text style={styles.button}> 申请加入电池优化白名单 </Text>
               </TouchableOpacity>
             </View>
           </>
